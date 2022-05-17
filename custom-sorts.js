@@ -34,7 +34,21 @@ function validAnagrams(s, t) {
 
 
 function reverseBaseSort(arr) {
-  // Your code here
+  let array = arr.sort((a,b) => a-b);
+  let buckets = {};
+
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    let length = element.toString().length;
+
+    try {
+      buckets[length].push(element) // works if bucket exists
+    }
+    catch {
+      buckets[length] = [element]
+    }
+  }
+  return Object.values(buckets).reverse().flat() // Object.values creates array of arrays, reverse is reversing the arrays, .flat creates a new array w all subarray ele concat'd into it 
 }
 
 function frequencySort(arr) {
