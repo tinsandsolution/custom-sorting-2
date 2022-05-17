@@ -48,11 +48,54 @@ function reverseBaseSort(arr) {
       buckets[length] = [element]
     }
   }
-  return Object.values(buckets).reverse().flat() // Object.values creates array of arrays, reverse is reversing the arrays, .flat creates a new array w all subarray ele concat'd into it 
+  return Object.values(buckets).reverse().flat() // Object.values creates array of arrays, reverse is reversing the arrays, .flat creates a new array w all subarray ele concat'd into it
 }
 
 function frequencySort(arr) {
-  // Your code here
+  // [-1, 1, -6, 4, 5, -6, 1, 4, 1]
+  console.log(arr)
+  // arr = arr.sort((a, b) => {
+  //   return a - b;
+  // });
+
+  console.log(arr)
+
+
+  let counts = {}
+  arr.forEach( num => {
+    if(!counts[num]) counts[num] = 1
+    else counts[num] += 1
+  })
+  console.log("counts: ", counts)
+  // { '1': 3, '4': 2, '5': 1, '-6': 2, '-1': 1 }
+
+  let newCounts = {}
+  for (let i = 0; i < Object.keys(counts).length; i++) {
+    const key = Object.keys(counts)[i]; // 1
+    const val = counts[key] // 3
+
+    if(!newCounts[val]) newCounts[val] = [Number(key)] // { '1': [ '5'] }
+    else newCounts[val].push(Number(key)) // { '1': [ '5', '-1' ] }
+  }
+  // { '1': [ '5', '-1' ], '2': [ '4', '-6' ], '3': [ '1' ] }
+  console.log("newCounts: ", newCounts)
+
+  let sorted = []
+  for (let freq of Object.keys(newCounts)) {
+    console.log(`we're looking at a frequency of ${freq}`)
+    newCounts[freq] = newCounts[freq].sort((a,b) => b - a)
+
+    for ( let num of newCounts[freq] ){
+      console.log(`${num} shows up ${freq} times`)
+      for (let i = 0; i < freq; i++) sorted.push(Number(num))
+    }
+  }
+
+  // [5, -1, 4, 4, -6, -6, 1, 1, 1]
+  console.log(sorted)
+  console.log("              ")
+  return sorted
+
 }
 
 module.exports = [
