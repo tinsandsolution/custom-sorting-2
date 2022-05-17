@@ -18,8 +18,20 @@ function oddEvenSort(arr) {
 }
 
 function validAnagrams(s, t) {
-  // Your code here
+  const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+  const sorteda = s.split("").sort((a,b) => {
+    const aindex= alphabet.indexOf(a)
+    const bindex = alphabet.indexOf(b)
+    return aindex - bindex
+  }).join("")
+  const sortedb = t.split("").sort((a,b) => a.localeCompare(b)).join("")
+
+
+
+  return sorteda === sortedb
 }
+
+
 
 function reverseBaseSort(arr) {
   // Your code here
